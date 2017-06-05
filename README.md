@@ -9,7 +9,7 @@
 
 
 ## Demo
-![Demo GIF](https://github.com/Saiteja-Reddy/OpenGL-BLOXORZ-Idea---Miniclip-/blob/master/bloxorz.gif "Demo of Aquaria")
+![Demo GIF](https://github.com/Saiteja-Reddy/WebGL---Interactive-Aquarium-Simulator/blob/master/aquaria.gif "Demo of Aquaria")
 
 ### Instruction / Features
 * Firstly, select an image for the skybox and load into the game.
