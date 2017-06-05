@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <title>WebGL - Fishes</title>
+    </head>
+    <body >
+
+<script type='text/javascript'>
+var imagealreadyLoaded = 0;
+var reloadtextures = 0;
+var gamestarted = 0;
+
+function main()
+{
+    var inputFileToLoad = document.createElement("input");
+    inputFileToLoad.type = "file";
+    inputFileToLoad.id = "inputFileToLoad";
+    document.body.appendChild(inputFileToLoad);
+
+    var buttonLoadFile = document.createElement("button");
+    buttonLoadFile.onclick = loadImageFileAsURL;
+    buttonLoadFile.textContent = "Load Selected File";
+    document.body.appendChild(buttonLoadFile);
+
+    var buttonSH = document.createElement("button");
+    buttonSH.onclick = takeScreenshot;
+    buttonSH.textContent = "Take ScreenShot";
+    document.body.appendChild(buttonSH);    
+}
+
+function takeScreenshot()
+{
+    console.log('here');
+    var canvas1 = document.getElementById('game-surface');
+    canvas1.setAttribute('crossOrigin','anonymous');
+    var img = document.getElementById('imageToShowCanvas');
+    img.src = canvas1.toDataURL();    
+}
+
+function loadImageFileAsURL()
+{
+    var filesSelected = document.getElementById("inputFileToLoad").files;
+    if (filesSelected.length > 0)
+    {
+        var fileToLoad = filesSelected[0];
+
+        if (fileToLoad.type.match("image.*"))
+        {
+            var fileReader = new FileReader();
+            fileReader.onload = function(fileLoadedEvent) 
+            {
+                if(imagealreadyLoaded == 0)
+                {
+                    var imageLoaded = document.createElement("img");
+                    imageLoaded.setAttribute("id", "crate-image");
+                    imageLoaded.setAttribute("width", "0");
+                    imageLoaded.setAttribute("height", "0");
+                    imageLoaded.src = fileLoadedEvent.target.result;
+                    document.body.appendChild(imageLoaded);
+                    InitDemo();
+                    gamestarted = 1;
+                    imagealreadyLoaded = 1;
+                }
+                else
+                {
+                    var imageLoaded = document.getElementById("crate-image");
+                    imageLoaded.src = fileLoadedEvent.target.result;
+                    reloadtextures = 1;
+                }
+            };
+            fileReader.readAsDataURL(fileToLoad);
+        }
+    }
+}
+
+main();
+
+</script>
+
+        <canvas id="game-surface" width="800" height="600">
+            Your browser does not support HTML5
+        </canvas>
+        <br />
+        <i>Demo is above this text</i>
+        <!-- <img id="crate-image" src="http://127.0.0.1:8000/container2.png" width="0" height="0"></img> -->
+        <img id="rock1-image" src="http://127.0.0.1:8000/Rock6.jpg" width="0" height="0"></img>
+        <img id="rock2-image" src="http://127.0.0.1:8000/rock2.jpg" width="0" height="0"></img>
+        <img id="rock3-image" src="http://127.0.0.1:8000/rock3.jpg" width="0" height="0"></img>
+        <img id="fish-image" src="http://127.0.0.1:8000/TropicalFish11.jpg" width="0" height="0"></img>
+        <img id="fish2-image" src="http://127.0.0.1:8000/TropicalFish12.jpg" width="0" height="0"></img>
+        <img id="fish21-image" src="http://127.0.0.1:8000/TropicalFish122.png" width="0" height="0"></img>
+        <img id="fish3-image" src="http://127.0.0.1:8000/TropicalFish2.jpg" width="0" height="0"></img>
+        <img id="fish31-image" src="http://127.0.0.1:8000/TropicalFish22.png" width="0" height="0"></img>
+        <img id="ship-image" src="http://127.0.0.1:8000/ship.png" width="0" height="0"></img>
+        <img id="base-image" src="http://127.0.0.1:8000/base.jpg" width="0" height="0"></img>
+        <img id="grass-image" src="http://127.0.0.1:8000/weed.png" width="0" height="0"></img>
+        <img id="shark-image" src="http://127.0.0.1:8000/greatwhiteshark.png" width="0" height="0"></img>
+        <img id="oxy-image" src="http://127.0.0.1:8000/plastic.jpeg" width="0" height="0"></img>
+        <img id="imageToShowCanvas" src="#"></img>
+        <script src="gl-matrix.js"></script>
+        <script src="data.js"></script>
+        <script src="data1.js"></script>
+        <script src="data2.js"></script>
+        <script src="data3.js"></script>
+        <script src="data4.js"></script>
+        <script src="initgl.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
+
+<!-- python -m SimpleHttpServer -->

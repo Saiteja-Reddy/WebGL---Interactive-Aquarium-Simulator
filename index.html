@@ -1,0 +1,249 @@
+<html>
+    <head>
+        <title>WebGL - Fishes</title>
+      <!--Import Google Icon Font-->
+      <link src="css/material-icons.css" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+      <style>
+      </style>     
+    </head>
+    <body onload="main();">
+
+      <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+
+<script type='text/javascript'>
+var imagealreadyLoaded = 0;
+var reloadtextures = 0;
+var gamestarted = 0;
+
+// window.addEventListener('keydown', function(e) {
+//   if(e.keyCode == 32 && e.target == document.body) {
+//     e.preventDefault();
+//   }
+// });
+
+window.addEventListener("keydown", function(e) {
+    // space and arrow keys
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
+function main()
+{
+    var placetoappend = document.getElementById("dashboard");
+
+    var inputFileToLoad = document.createElement("input");
+    inputFileToLoad.type = "file";
+    inputFileToLoad.id = "inputFileToLoad";
+    placetoappend.appendChild(inputFileToLoad);
+
+    var buttonLoadFile = document.createElement("button");
+    buttonLoadFile.onclick = loadImageFileAsURL;
+    buttonLoadFile.textContent = "Load Selected File";
+    placetoappend.appendChild(buttonLoadFile);
+
+    var buttonSH = document.createElement("button");
+    buttonSH.onclick = takeScreenshot;
+    buttonSH.textContent = "Take ScreenShot";
+    placetoappend.appendChild(buttonSH);    
+}
+
+function takeScreenshot()
+{
+    console.log('here');
+    var canvas1 = document.getElementById('game-surface');
+    canvas1.setAttribute('crossOrigin','anonymous');
+    var img = document.getElementById('imageToShowCanvas');
+    img.style = "display: block;"
+    img.src = canvas1.toDataURL();    
+}
+
+function loadImageFileAsURL()
+{
+    var filesSelected = document.getElementById("inputFileToLoad").files;
+    if (filesSelected.length > 0)
+    {
+        var fileToLoad = filesSelected[0];
+
+        if (fileToLoad.type.match("image.*"))
+        {
+            var fileReader = new FileReader();
+            fileReader.onload = function(fileLoadedEvent) 
+            {
+                if(imagealreadyLoaded == 0)
+                {
+                    var imageLoaded = document.createElement("img");
+                    imageLoaded.setAttribute("id", "crate-image");
+                    imageLoaded.setAttribute("width", "0");
+                    imageLoaded.setAttribute("height", "0");
+                    imageLoaded.src = fileLoadedEvent.target.result;
+                    document.body.appendChild(imageLoaded);
+                    InitDemo();
+                    var mydivs = document.getElementById('matext');
+                    mydivs.innerHTML = "You have not selected any fish. Press F key to select a fish.";
+                    gamestarted = 1;
+                    imagealreadyLoaded = 1;
+                }
+                else
+                {
+                    var imageLoaded = document.getElementById("crate-image");
+                    imageLoaded.src = fileLoadedEvent.target.result;
+                    reloadtextures = 1;
+                }
+            };
+            fileReader.readAsDataURL(fileToLoad);
+        }
+    }
+}
+
+var imagesrc = ['media/none.png', 'media/TropicalFish11.jpg','media/TropicalFish12.jpg','media/TropicalFish2.jpg','media/shark.png'];
+
+var textsrc = ["You have not selected any fish. Press F key to select a fish." , 'Your friendly common tropical fish.' , "Orange striped tropical fish - Name\'s not Nemo XP" , 'Blue colored tropical fish. Remember Dory ?' , 'Very dangerous shark - kept in a different pool.'];
+
+var viewsrc = ["Free-Cam","Fish Front","Third Person","FishEye"];
+
+</script>
+
+
+  <nav class="blue">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">Aquaria</a>
+    </div>
+  </nav>
+
+<br>
+
+
+    <div class="row">
+
+            <div class="col s7">
+                <h3 class="center">Window</h3>
+
+                    <canvas id="game-surface" width="800" height="600">
+                        Your browser does not support HTML5
+                    </canvas>
+                    <br />
+                    <!-- <img id="crate-image" src="http://127.0.0.1:8000/container2.png" width="0" height="0"></img> -->
+                    <img id="rock1-image" src="http://127.0.0.1:8000/media/Rock6.jpg" width="0" height="0"></img>
+                    <img id="rock2-image" src="http://127.0.0.1:8000/media/rock2.jpg" width="0" height="0"></img>
+                    <img id="rock3-image" src="http://127.0.0.1:8000/media/rock3.jpg" width="0" height="0"></img>
+                    <img id="fish-image" src="http://127.0.0.1:8000/media/TropicalFish11.jpg" width="0" height="0"></img>
+                    <img id="fish2-image" src="http://127.0.0.1:8000/media/TropicalFish12.jpg" width="0" height="0"></img>
+                    <img id="fish21-image" src="http://127.0.0.1:8000/media/TropicalFish122.png" width="0" height="0"></img>
+                    <img id="fish3-image" src="http://127.0.0.1:8000/media/TropicalFish2.jpg" width="0" height="0"></img>
+                    <img id="fish31-image" src="http://127.0.0.1:8000/media/TropicalFish22.png" width="0" height="0"></img>
+                    <img id="ship-image" src="http://127.0.0.1:8000/media/ship.png" width="0" height="0"></img>
+                    <img id="base-image" src="http://127.0.0.1:8000/media/base.jpg" width="0" height="0"></img>
+                    <img id="grass-image" src="http://127.0.0.1:8000/media/weed.png" width="0" height="0"></img>
+                    <img id="shark-image" src="http://127.0.0.1:8000/media/greatwhiteshark.png" width="0" height="0"></img>
+                    <img id="oxy-image" src="http://127.0.0.1:8000/media/plastic.jpeg" width="0" height="0"></img>
+                    <img id="imageToShowCanvas" src="#" style="display: none;"></img>
+                    <script src="js/gl-matrix.js"></script>
+                    <script src="js/data.js"></script>
+                    <script src="js/data1.js"></script>
+                    <script src="js/data2.js"></script>
+                    <script src="js/data3.js"></script>
+                    <script src="js/data4.js"></script>
+                    <script src="js/initgl.js"></script>
+                    <script src="js/app.js"></script>
+
+            </div>
+
+            <div class="col s5" id="dashboard">
+            <h3 class="center">Dashboard</h3>
+            <p class="center">Scroll Down for Instructions</p>
+            <h5>Selected Fish :</h5>
+              <div class="row">
+                <div class="col s12 m5">
+                  <div class="card">
+                    <div class="card-image">
+                      <img id="selected-fish" src="media/none.png">
+                    </div>
+                    <div class="card-content">
+                      <p id="matext">No fishes Spotted. Load up an image to start.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>         
+
+            <div class="row">
+                <div class="col s4">
+                    <blockquote>
+                                  <h5>Population</h5> 
+                                  <h5 id="fishesnum"></h5>
+                    </blockquote>
+                </div>
+                <div class="col s5">
+                    <blockquote>
+                                  <h5>View</h5> 
+                                  <h5 id="viewnum"></h5>
+                    </blockquote>
+                </div>
+            </div>         
+
+            <button onclick="dropfood();" >Drop Food</button>
+            <button onclick="spawnbubble();">Spawn Bubble</button>
+            <button onclick="resetcam();">Reset Camera</button>
+            <button onclick="changeColor();">Change Skins</button>
+            <button onclick="changeView();">Change View</button>
+            <br>
+            <br>
+            </div>
+</div>
+
+        <div class="container">
+        <h3>How to play / Instructions:</h3>
+        <ul class="browser-default">
+        <li>Firstly, select an image for the skybox and load into the game.</li>
+        <li>The simulator starts of with few fishes.</li>
+        <li>The fishes move on their own.</li>
+        <li>To change selections between fishes - use the 'F' Key.</li>
+        <li>When a fish has been selected you can control the movement of the fish using the 'W',A','S','D' keys.</li>
+        <li>You can change between views using the 'V' Key. There are modes like :
+            <ol>
+                <li>Fish Front View</li>
+                <li>Third Person View</li>
+                <li>Fish Eye View</li>
+                <li>Move to fish position View</li>
+                <li>Free Cam View</li>
+            </ol>
+        </li>
+        <li>Press the 'B' key for the selected fish to release bubbles.</li>
+        <li>Press the 'Spacebar' for the selected fish to lay an egg.</li>
+        <li>Eggs laid by the fish hatch in sometime to give small baby fish which grow up in time</li>
+        <li>When no fish has been selected, press 'B' key to either raise pebbles by generating bubbles from the ground or release air into the tank using the oxygenator.</li>
+        <li>In the free cam mode, i.e when no fish has been selected use the arrow keys and 'Z' and 'X' keys to move the camera around.</li>
+        <li>Press the 'R' key anytime to change colors of the fish.</li>
+        <li>Load any image at anytime after the simulator starts, to change dynamically the skybox texture.</li>
+        <li>Whenever some fish has been selected , press the 'Q' key to kill the fish.</li>
+        <li>There is also a shark in the simulator. Discover it on your own :P </li>
+        <li>When a fish has been selected you can also use mouse drag to control / steer the fish.</li>
+        <li>When no fish has been selected you can press the left mouse button to randomly place food inside the aquarium which the fish will competitively try to eat.</li>
+        <li>Also, when no fish has been selected you can press the right mouse button to randomly release bubbles.</li>
+        <li>There is seaweed and pebbles at the bottom of the aquarium</li>
+        <li>You can find - a ship at the bottom of the aquarium , also a tower and an oxygenator.</li>
+        <li>The seaweed periodically wave and the ground is countoured with a green texture. </li>
+        <li>You can always after the start of the simulator take a screenshot by clicking on 'Take Screenshot' button.</li>
+        </ul>
+        </div>
+
+
+        <footer class="page-footer blue">
+          <div class="footer-copyright">
+            <div class="container">
+            © 2017 Made by Sai Teja Reddy Moolamalla
+            </div>
+          </div>
+        </footer>
+
+    </body>
+
+</html>
+
+<!-- python -m SimpleHttpServer -->
