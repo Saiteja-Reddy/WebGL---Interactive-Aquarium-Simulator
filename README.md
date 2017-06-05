@@ -18,14 +18,13 @@
 * To change selections between fishes - use the 'F' Key.
 * When a fish has been selected you can control the movement of the fish using the 'W',A','S','D' keys.
 * You can change between views using the 'V' Key. There are modes like :
-  1. 2. 3. 4. 5.
-* Press the
-* Press the
-Fish Front View
-Third Person View
-Fish Eye View
-Move to fish position View Free Cam View
-'B' key for the selected fish to release bubbles. 'Spacebar' for the selected fish to lay an egg.
+  	* Fish Front View
+	* Third Person View
+	* Fish Eye View
+	* Move to fish position View
+	* Free Cam View
+* Press the 'B' key for the selected fish to release bubbles.
+* Press the 'Spacebar' for the selected fish to lay an egg.
 * Eggs laid by the fish hatch in sometime to give small baby fish which grow up in time
 * When no fish has been selected, press 'B' key to either raise pebbles by generating bubbles from the ground or
 release air into the tank using the oxygenator.
